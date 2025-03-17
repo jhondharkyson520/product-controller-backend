@@ -1,6 +1,6 @@
 import { UserRepository } from '../../repositories/user/user-repository';
 
-export class FindAllUsers {
+export class GetAllUsers {
     constructor(private userRepository: UserRepository) {}
 
     async execute() {        

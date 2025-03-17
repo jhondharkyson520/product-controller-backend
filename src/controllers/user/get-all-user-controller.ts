@@ -1,13 +1,13 @@
 import { Request, Response } from 'express';
 import { PrismaUserRepository } from '../../repositories/user/prisma-user-repository';
-import { FindAllUsers } from '../../use-cases/user/find-all-users';
+import { GetAllUsers } from '../../use-cases/user/get-all-users';
 
-const userRepository = new PrismaUserRepository
-const createUser = new FindAllUsers(userRepository);
+const userRepository = new PrismaUserRepository;
+const findAllUsers = new GetAllUsers(userRepository);
 
-export const findAllUsersController = async (req: Request, res: Response): Promise<Response> => {
+export const getAllUsersController = async (req: Request, res: Response): Promise<Response> => {
     try {
-        const {user} =  await createUser.execute();
+        const {user} =  await findAllUsers.execute();
 
         return res.status(200).json({
             sucess: 'Users list',
