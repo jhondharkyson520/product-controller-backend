@@ -1,20 +1,43 @@
-import jwt from 'jsonwebtoken';
-import { Response, Request, NextFunction } from 'express';
+import jwt, { JwtPayload } from 'jsonwebtoken';
+import { Request, Response, NextFunction } from 'express';
 
-export const authenticateToken = (req: Request & {user?: any}, res: Response, next: NextFunction) => {
-    const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1];
+interface CustomJwtPayload extends JwtPayload {
+  id: string;
+  email: string;
+  password: string;
+}
 
-    if (!token) {
-        return res.status(401).json({ error: 'Token not provided' });
+
+declare global {
+  namespace Express {
+    interface Request {
+      user?: CustomJwtPayload;
+    }
+  }
+}
+
+const authenticateToken = (req: Request, res: Response, next: NextFunction): void => {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.startsWith('Bearer ') ? authHeader.split(' ')[1] : null;
+
+  if (!token) {
+    res.status(401).json({ message: 'Token ausente ou formato inválido' });
+    return;
+  }
+
+  jwt.verify(token, process.env.JWT_SECRET!, (err, decoded) => {
+    if (err) {
+      return res.status(403).json({ message: 'Token inválido' });
     }
 
-    jwt.verify(token, process.env.JWT_SECRET!, (err, decoded) => {
-        if (err) {
-            return res.status(403).json({error: 'Invalid token'});
-        }
-
-        req.user = decoded;
-        next();
-    });
+    if (decoded && typeof decoded !== 'string') {
+      const typedDecoded = decoded as CustomJwtPayload;
+      req.user = typedDecoded;
+      next();
+    } else {
+      res.status(403).json({ message: 'Token inválido' });
+    }
+  });
 };
+
+export default authenticateToken;

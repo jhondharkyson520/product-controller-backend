@@ -11,12 +11,12 @@ export class AuthenticateUser {
     async execute(email: string, password: string) {
         const user = await this.userRepository.findByEmail(email);
         if(!user) {
-            return { user: null, token: null };
+            throw new Error('User not found');
         }
 
         const passwordMatch = await bcrypt.compare(password, user.password);
         if(!passwordMatch) {
-            return { user: null, token: null };
+            throw new Error('Password incorrect');
         }
 
         const token = jwt.sign(
