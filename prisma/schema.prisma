@@ -1,5 +1,6 @@
 generator client {
   provider = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
 }
 
 datasource db {
@@ -16,8 +17,8 @@ model User {
 
 model Product {
   id        String @id @default(uuid())
-  name      String
-  amount    Int
+  name      String @unique
+  amount    Float
   value     Float
   createdAt DateTime
   updatedAt DateTime
