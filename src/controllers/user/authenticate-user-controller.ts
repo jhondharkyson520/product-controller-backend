@@ -19,8 +19,13 @@ export const authenticateUserController = async (req: Request, res: Response): P
             user: {id: user.id, name: user.name, email: user.email},
             token
         });
-    } catch(error) {
-        console.error(error);           
+    } catch(error: any) {
+        console.error(error);
+        if (error.message === 'Password incorrect') {
+            return res.status(401).json({ error: 'Password incorrect' });
+        } else if (error.message === 'User not found') {
+            return res.status(404).json({error: 'User not found'});
+        }        
         return res.status(500).json({error: 'Internal Server Error'});        
     }
 }

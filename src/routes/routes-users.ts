@@ -3,6 +3,7 @@ import { createUserController } from "../controllers/user/create-user-controller
 import { authenticateUserController } from "../controllers/user/authenticate-user-controller";
 import authenticateToken  from "../middlewares/authorization-routes";
 import { getAllUsersController } from "../controllers/user/get-all-user-controller";
+import { updateUserController } from "../controllers/user/update-user-controller";
 
 const routesUser = Router();
 routesUser.post('/create', async (req, res) => {
@@ -13,6 +14,9 @@ routesUser.post('/login', async (req, res) => {
 });
 routesUser.get('/all-users', authenticateToken, async (req, res) => {
   await getAllUsersController(req, res);
+});
+routesUser.put('/update/:id', authenticateToken, async (req, res) => {
+  await updateUserController(req, res);
 });
 routesUser.get('/hello', authenticateToken, (req: Request, res: Response) => {
     
