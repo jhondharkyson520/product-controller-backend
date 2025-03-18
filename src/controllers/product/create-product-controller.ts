@@ -23,8 +23,11 @@ export const createProductController = async (req: Request, res: Response): Prom
                 updatedAt: todayDate
             }
         });
-    } catch(error) {
-        console.error(error); 
+    } catch(error: any) {
+        console.error(error);
+        if(error.message === 'Product with this name already exists') {
+            return res.status(409).json({error: 'Product with this name already exists'});
+        }
         return res.status(500).json({error: 'Internal Server Error'});        
     }
 }

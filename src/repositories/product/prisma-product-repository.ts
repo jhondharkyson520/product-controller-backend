@@ -11,6 +11,12 @@ export class PrismaProductRepository implements ProductRepository {
     async findAll(): Promise<Product[]> {
         return prisma.product.findMany();
     }
+
+    async findByName(name: string): Promise<Product | null> {
+        return prisma.product.findUnique({
+            where: {name: name}
+        });
+    }
     
     async update(id: string, data: Partial<Product>): Promise<Product> {
         return prisma.product.update({

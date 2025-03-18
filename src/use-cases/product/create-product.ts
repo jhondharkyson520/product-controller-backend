@@ -9,6 +9,12 @@ export class CreateProduct {
 
     async execute(name: string, amount: number, value: number) {
         try {
+            const existingProduct = await this.productRepository.findByName(name);
+
+            if (existingProduct) {
+                throw new Error('Product with this name already exists');
+            }
+
             const product = await this.productRepository.create({
                 id: uuidv4(), 
                 name, 
@@ -20,6 +26,9 @@ export class CreateProduct {
     
             return product;
         } catch (error) {
+            if(error instanceof Error){
+                throw error;
+            }
             throw new Error('Error to create product');
         }
     }
