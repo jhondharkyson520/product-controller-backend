@@ -7,16 +7,20 @@ dotenv.config();
 export class CreateProduct {
     constructor(private productRepository: ProductRepository) {}
 
-    async execute(name: string, amount: number, value: number, createdAt: Date, updatedAt: Date) {
-        const product = await this.productRepository.create({
-            id: uuidv4(), 
-            name, 
-            amount,
-            value,
-            createdAt: new Date(),
-            updatedAt
-        });
-
-        return product;
+    async execute(name: string, amount: number, value: number) {
+        try {
+            const product = await this.productRepository.create({
+                id: uuidv4(), 
+                name, 
+                amount,
+                value,
+                createdAt: new Date(),
+                updatedAt: new Date()
+            });
+    
+            return product;
+        } catch (error) {
+            throw new Error('Error to create product');
+        }
     }
 }

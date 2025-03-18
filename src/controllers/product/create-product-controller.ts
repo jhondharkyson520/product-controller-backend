@@ -8,8 +8,9 @@ const createProduct = new CreateProduct(productRepository);
 
 export const createProductController = async (req: Request, res: Response): Promise<Response> => {
     try {
-        const {name, amount, value, createdAt, updatedAt} = req.body;
-        const product=  await createProduct.execute(name, amount, value, createdAt, updatedAt);
+        const todayDate = new Date();
+        const {name, amount, value} = req.body;
+        const product=  await createProduct.execute(name, amount, value);
 
         return res.status(201).json({
             sucess: 'Product created',
@@ -18,12 +19,12 @@ export const createProductController = async (req: Request, res: Response): Prom
                 name: product.name, 
                 amount: product.amount, 
                 value: product.value, 
-                createdAt: product.createdAt, 
-                updatedAt: product.updatedAt
+                createdAt: todayDate, 
+                updatedAt: todayDate
             }
         });
     } catch(error) {
-        console.error(error);        
+        console.error(error); 
         return res.status(500).json({error: 'Internal Server Error'});        
     }
 }
