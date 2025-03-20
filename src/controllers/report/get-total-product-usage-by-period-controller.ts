@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { PrismaStockMovementRepository } from "../../repositories/stock-movement/prisma-stock-movement-repository";
+import { PrismaStockMovementRepository } from "../../repositories/stock/prisma-stock-repository";
 import { ProductUsageByPeriodService } from "../../services/report/product-usage-by-period-service";
 
 

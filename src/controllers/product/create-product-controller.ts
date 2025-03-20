@@ -2,7 +2,7 @@
 import { Request, Response } from 'express';
 import { PrismaProductRepository } from '../../repositories/product/prisma-product-repository';
 import { CreateProduct } from '../../use-cases/product/create-product';
-import { PrismaStockMovementRepository } from '../../repositories/stock-movement/prisma-stock-movement-repository';
+import { PrismaStockMovementRepository } from '../../repositories/stock/prisma-stock-repository';
 
 const productRepository = new PrismaProductRepository();
 const stockMovementRepository = new PrismaStockMovementRepository();

@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 import dotenv from "dotenv";
 import { ProductRepository } from '../../repositories/product/product-repository';
-import { StockMovementRepository } from '../../repositories/stock-movement/stock-movement-repository';
+import { StockMovementRepository } from '../../repositories/stock/stock-repository';
 
 dotenv.config();
 

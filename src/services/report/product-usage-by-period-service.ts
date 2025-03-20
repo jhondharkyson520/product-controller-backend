@@ -1,5 +1,5 @@
-import { StockMovement } from "../../entities/stock-movement";
-import { StockMovementRepository } from "../../repositories/stock-movement/stock-movement-repository";
+import { StockMovement } from "../../entities/stock";
+import { StockMovementRepository } from "../../repositories/stock/stock-repository";
 import { ProductUsageByPeriod } from "../interfaces/product-usage-by-period-interface";
 
 export class ProductUsageByPeriodService {

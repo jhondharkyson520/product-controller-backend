@@ -1,6 +1,6 @@
 import { prisma } from "../../database/prisma-client";
-import { StockMovement } from "../../entities/stock-movement";
-import { StockMovementRepository } from "./stock-movement-repository";
+import { StockMovement } from "../../entities/stock";
+import { StockMovementRepository } from "./stock-repository";
 
 export class PrismaStockMovementRepository implements StockMovementRepository {    
     async create(stock: Omit<StockMovement, 'product'>): Promise<StockMovement> {
