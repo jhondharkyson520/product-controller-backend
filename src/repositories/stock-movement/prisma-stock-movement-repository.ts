@@ -26,11 +26,16 @@ export class PrismaStockMovementRepository implements StockMovementRepository {
     }
 
     async findAll(): Promise<StockMovement[]> {
-        const stockMovements = await prisma.stockMovement.findMany();
-
+        const stockMovements = await prisma.stockMovement.findMany({
+            include: {
+                product: true,
+            }
+        });
+        console.log('Resultados do Prisma:', stockMovements);
         return stockMovements.map(stock => ({
             id: stock.id,
             productId: stock.productId,
+            product: stock.product,
             quantity: stock.quantity,
             dateTime: stock.dateTime,
             type: stock.type as 'entrada' | 'saida',

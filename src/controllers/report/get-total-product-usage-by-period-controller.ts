@@ -1,8 +1,9 @@
-import { Request, Response } from 'express';
-import { PrismaProductRepository } from '../../repositories/product/prisma-product-repository';
-import { TotalSpentByMonthService } from '../../services/report/total-spent-by-month-service';
+import { Request, Response } from "express";
+import { PrismaStockMovementRepository } from "../../repositories/stock-movement/prisma-stock-movement-repository";
+import { ProductUsageByPeriodService } from "../../services/report/product-usage-by-period-service";
 
-export const getTotalSpentByMonthController = async (req: Request, res: Response) => {
+
+export const getTotalProductUsageByPeriodController = async (req: Request, res: Response) => {
   try {
     const {startDate, endDate} = req.query;
 
@@ -12,10 +13,11 @@ export const getTotalSpentByMonthController = async (req: Request, res: Response
 
     const startDateParsed = new Date(startDate.toString());
     const endDateParsed = new Date(endDate.toString());
-    const productRepository = new PrismaProductRepository();
-    const service = new TotalSpentByMonthService(productRepository);
+    const stockRepository = new PrismaStockMovementRepository();
+    const service = new ProductUsageByPeriodService(stockRepository);
     const report = await service.execute(startDateParsed, endDateParsed);
-
+    console.log(report);
+    
     return res.status(200).json(report);
   } catch (error) {
     console.error('Error in getTotalSpentByMonthController:', error);

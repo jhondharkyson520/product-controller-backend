@@ -7,9 +7,16 @@ export class ProductUsageByPeriodService {
 
   async execute(startDate: Date, endDate: Date): Promise<ProductUsageByPeriod[]> {
     const stockMovements = await this.stockMovement.findAll();
-    const filteredStocks = stockMovements.filter(
-      (stock) => stock.dateTime >= startDate && stock.dateTime <= endDate
-    );
+    console.log("Start Date:", startDate);
+    console.log("End Date:", endDate);
+    const filteredStocks = stockMovements.filter((stock) => {
+      console.log(
+        `Checking: ${stock.dateTime} - (${stock.dateTime >= startDate && stock.dateTime <= endDate ? "✅ Pass" : "❌ Fail"})`
+      );
+      return stock.dateTime >= startDate && stock.dateTime <= endDate;
+    });
+    
+    console.log("Filtered Stocks:", filteredStocks);
     const productTotals: {[name: string]: number} = {};
 
     filteredStocks.forEach((stock: StockMovement) => {
