@@ -2,7 +2,7 @@ import { prisma } from "../../database/prisma-client";
 import { StockMovement } from "../../entities/stock-movement";
 import { StockMovementRepository } from "./stock-movement-repository";
 
-export class PrismaStockMovementRepository implements StockMovementRepository {
+export class PrismaStockMovementRepository implements StockMovementRepository {    
     async create(stock: Omit<StockMovement, 'product'>): Promise<StockMovement> {
         const createdStock = await prisma.stockMovement.create({
             data: {
@@ -23,5 +23,18 @@ export class PrismaStockMovementRepository implements StockMovementRepository {
             type: createdStock.type as 'entrada' | 'saida',
             reason: createdStock.reason || undefined,
         };
+    }
+
+    async findAll(): Promise<StockMovement[]> {
+        const stockMovements = await prisma.stockMovement.findMany();
+
+        return stockMovements.map(stock => ({
+            id: stock.id,
+            productId: stock.productId,
+            quantity: stock.quantity,
+            dateTime: stock.dateTime,
+            type: stock.type as 'entrada' | 'saida',
+            reason: stock.reason || undefined
+        }));
     }
 }

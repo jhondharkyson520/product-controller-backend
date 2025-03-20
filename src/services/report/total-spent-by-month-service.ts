@@ -1,6 +1,6 @@
 import { Product } from '../../entities/product';
 import { ProductRepository } from '../../repositories/product/product-repository';
-import { TotalSpentByMonthReport } from '../interfaces/report-interface';
+import { TotalSpentByMonthReport } from '../interfaces/total-spent-by-month-report-interface';
 
 export class TotalSpentByMonthService {
   constructor(private productRepository: ProductRepository) {}
