@@ -3,9 +3,16 @@ import { Product } from "../../entities/product";
 import { ProductRepository } from "./product-repository";
 
 export class PrismaProductRepository implements ProductRepository {
-    async create(product: Product): Promise<Product> {
+    async create(product: Omit<Product, 'stockMovements'>): Promise<Product> {
         return prisma.product.create({
-            data: product
+            data: {
+                id: product.id,
+                name: product.name,
+                amount: product.amount,
+                value: product.value,
+                createdAt: product.createdAt,
+                updatedAt: product.updatedAt,
+            },
         });
     }
     async findAll(): Promise<Product[]> {
@@ -21,7 +28,7 @@ export class PrismaProductRepository implements ProductRepository {
     async update(id: string, data: Partial<Product>): Promise<Product> {
         return prisma.product.update({
             where: {id},
-            data
+            data : {} //consertar aqui
         });
     }
     delete(id: string): Promise<Product> {

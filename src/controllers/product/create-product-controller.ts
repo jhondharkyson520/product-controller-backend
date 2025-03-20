@@ -2,9 +2,11 @@
 import { Request, Response } from 'express';
 import { PrismaProductRepository } from '../../repositories/product/prisma-product-repository';
 import { CreateProduct } from '../../use-cases/product/create-product';
+import { PrismaStockMovementRepository } from '../../repositories/stock-movement/prisma-stock-movement-repository';
 
-const productRepository = new PrismaProductRepository
-const createProduct = new CreateProduct(productRepository);
+const productRepository = new PrismaProductRepository();
+const stockMovementRepository = new PrismaStockMovementRepository();
+const createProduct = new CreateProduct(productRepository, stockMovementRepository);
 
 export const createProductController = async (req: Request, res: Response): Promise<Response> => {
     try {
@@ -14,7 +16,7 @@ export const createProductController = async (req: Request, res: Response): Prom
 
         return res.status(201).json({
             sucess: 'Product created',
-            user: {
+            product: {
                 id: product.id, 
                 name: product.name, 
                 amount: product.amount, 

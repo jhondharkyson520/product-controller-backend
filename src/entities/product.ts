@@ -1,3 +1,5 @@
+import { StockMovement } from "./stock-movement";
+
 export interface Product {
     id: string;
     name: string;
@@ -5,4 +7,5 @@ export interface Product {
     value: number;
     createdAt: Date;
     updatedAt: Date;
+    stockMovements?: StockMovement[];
 }
