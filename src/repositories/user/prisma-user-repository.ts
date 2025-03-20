@@ -5,7 +5,12 @@ import { UserRepository } from "./user-repository";
 export class PrismaUserRepository implements UserRepository {
     async create(user: User): Promise<User> {
         return prisma.user.create({
-            data: user
+            data: {
+                id: user.id,
+                name: user.name,
+                email: user.email,
+                password: user.password
+            }
         });
     }
     async findAll(): Promise<User[]> {
@@ -19,7 +24,12 @@ export class PrismaUserRepository implements UserRepository {
     async update(id: string, data: Partial<User>): Promise<User> {
         return prisma.user.update({
             where: {id},
-            data
+            data: {
+                id: data.id,
+                name: data.name,
+                email: data.email,
+                password: data.password
+            }
         });
     }
     delete(id: string): Promise<User> {

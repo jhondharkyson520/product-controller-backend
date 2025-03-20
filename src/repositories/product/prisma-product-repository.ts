@@ -15,6 +15,7 @@ export class PrismaProductRepository implements ProductRepository {
             },
         });
     }
+    
     async findAll(): Promise<Product[]> {
         return prisma.product.findMany();
     }
@@ -28,7 +29,14 @@ export class PrismaProductRepository implements ProductRepository {
     async update(id: string, data: Partial<Product>): Promise<Product> {
         return prisma.product.update({
             where: {id},
-            data : {} //consertar aqui
+            data: {
+                id: data.id,
+                name: data.name,
+                amount: data.amount,
+                value: data.value,
+                createdAt: data.createdAt,
+                updatedAt: data.updatedAt,
+            }
         });
     }
     delete(id: string): Promise<Product> {
