@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
 import { PrismaStockMovementRepository } from "../../repositories/stock/prisma-stock-repository";
-import { ProductUsageByPeriodService } from "../../services/report/product-usage-by-period-service";
+import { ProductUsageByPeriodService } from "../../services/report/product-total-in-stock-period-service";
 
 
-export const getTotalProductUsageByPeriodController = async (req: Request, res: Response) => {
+export const getTotalProductStockByPeriodController = async (req: Request, res: Response) => {
   try {
     const {startDate, endDate} = req.query;
 
@@ -16,7 +16,12 @@ export const getTotalProductUsageByPeriodController = async (req: Request, res: 
     const stockRepository = new PrismaStockMovementRepository();
     const service = new ProductUsageByPeriodService(stockRepository);
     const report = await service.execute(startDateParsed, endDateParsed);
-    console.log(report);
+    console.log('teste',report);
+    if(report.length == 0){
+      console.log('passooou');
+      
+      return res.status(404).json({ error: 'Not data for this date' });
+    }
     
     return res.status(200).json(report);
   } catch (error) {

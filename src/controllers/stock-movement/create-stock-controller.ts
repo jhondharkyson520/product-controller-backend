@@ -9,8 +9,8 @@ const createStock = new CreateStock(stockMovementRepository);
 
 export const createStockController = async (req: Request, res: Response): Promise<Response> => {
     try {
-        const {productId, quantity, type, reason} = req.body;
-        const stock =  await createStock.execute(productId, quantity, type, reason);
+        const {productId, product, quantity, type, reason} = req.body;
+        const stock =  await createStock.execute(productId, product, quantity, type, reason);
 
         return res.status(201).json({
             sucess: 'Stock created',

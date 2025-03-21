@@ -21,7 +21,7 @@ export class PrismaProductRepository implements ProductRepository {
     }
 
     async findByName(name: string): Promise<Product | null> {
-        return prisma.product.findUnique({
+        return prisma.product.findFirst({
             where: {name: name}
         });
     }

@@ -9,12 +9,13 @@ export class CreateStock {
         private stockMovementRepository: StockMovementRepository
     ) {}
 
-    async execute(productId: string, quantity: number, type: 'entrada' | 'saida', reason: string) {
+    async execute(productId: string, product: string, quantity: number, type: 'entrada' | 'saida', reason: string) {
         try {
 
             const newStockMovement = await this.stockMovementRepository.create({
                 id: uuidv4(),
                 productId: productId,
+                product: product,
                 quantity: quantity,
                 dateTime: new Date(),
                 type: type,

@@ -38,7 +38,7 @@ export class ProductUsageByPeriodService {
         name,
         totalUsage,
       })
-    );
+    );    
 
     return report;
   }
