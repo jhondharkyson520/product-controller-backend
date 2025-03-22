@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { PrismaStockMovementRepository } from "../../repositories/stock/prisma-stock-repository";
 import { ProductUsageByPeriodService } from "../../services/report/product-total-in-stock-period-service";
+import { PrismaStockRepository } from "../../repositories/stock/prisma-stock-repository";
 
 
 export const getTotalProductStockByPeriodController = async (req: Request, res: Response) => {
@@ -13,19 +13,17 @@ export const getTotalProductStockByPeriodController = async (req: Request, res: 
 
     const startDateParsed = new Date(startDate.toString());
     const endDateParsed = new Date(endDate.toString());
-    const stockRepository = new PrismaStockMovementRepository();
+    const stockRepository = new PrismaStockRepository();
     const service = new ProductUsageByPeriodService(stockRepository);
     const report = await service.execute(startDateParsed, endDateParsed);
-    console.log('teste',report);
-    if(report.length == 0){
-      console.log('passooou');
-      
+
+    if(report.length == 0){      
       return res.status(404).json({ error: 'Not data for this date' });
     }
     
     return res.status(200).json(report);
   } catch (error) {
-    console.error('Error in getTotalSpentByMonthController:', error);
+    //console.error('Error in getTotalSpentByMonthController:', error);
     return res.status(500).json({ error: 'Internal server error' });
   }
 };

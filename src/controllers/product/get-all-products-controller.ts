@@ -14,7 +14,7 @@ export const getAllProductsController = async (req: Request, res: Response): Pro
             product
         });
     } catch(error) {
-        console.error(error);        
+        //console.error(error);        
         return res.status(500).json({error: 'Internal Server Error'});        
     }
 }

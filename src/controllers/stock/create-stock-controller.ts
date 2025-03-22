@@ -1,11 +1,13 @@
 
 import { Request, Response } from 'express';
-import { PrismaStockMovementRepository } from '../../repositories/stock/prisma-stock-repository';
 import { CreateStock } from '../../use-cases/stock/create-stock';
+import { PrismaStockRepository } from '../../repositories/stock/prisma-stock-repository';
+import { PrismaProductRepository } from '../../repositories/product/prisma-product-repository';
 
 
-const stockMovementRepository = new PrismaStockMovementRepository();
-const createStock = new CreateStock(stockMovementRepository);
+const stockRepository = new PrismaStockRepository();
+const productRepository = new PrismaProductRepository();
+const createStock = new CreateStock(productRepository, stockRepository);
 
 export const createStockController = async (req: Request, res: Response): Promise<Response> => {
     try {
@@ -27,6 +29,9 @@ export const createStockController = async (req: Request, res: Response): Promis
         console.error(error);
         if(error.message === 'Product with this name already exists') {
             return res.status(409).json({error: 'Product with this name already exists'});
+        }
+        if(error.message === 'The product is already zeroed') {
+            return res.status(409).json({error: 'The product is already zeroed'});
         }
         return res.status(500).json({error: 'Internal Server Error'});        
     }

@@ -21,10 +21,13 @@ src/
   ├── controllers/
   │     ├── product/
   │     ├── user/
+  │     ├── report/
+  │     ├── stock/
   ├── database/
   │     ├── prisma-client.ts
   ├── entities/
   │     ├── product.ts
+  │     ├── stock.ts/
   │     ├── user.ts
   ├── middlewares/
   │     ├── authorization-routes.ts
@@ -35,12 +38,18 @@ src/
   │     ├── user/
   │           ├── prisma-user-repository.ts
   │           ├── user-repository.ts
+  │     ├── stock/
+  │           ├── prisma-stock-repository.ts
+  │           ├── stock-repository.ts
   ├── routes/
   │     ├── routes-product.ts
   │     ├── routes-user.ts
+  │     ├── routes-stock.ts
+  │     ├── routes-report.ts
   ├── use-cases/
   │     ├── product/
   │     ├── user/
+  │     ├── stock/
   ├── main.ts
   ├── Dockerfile
   ├── docker-compose.yml
@@ -69,6 +78,18 @@ export interface User {
     password: string;
 }
 ```
+### Estoque (`Stock`)
+```typescript
+export interface StockMovement {
+    id: string;
+    productId: string;
+    product?: Product;
+    quantity: number;
+    dateTime: Date;
+    type: 'entrada' | 'saida';
+    reason?: string;    
+}
+```
 
 ## Endpoints
 
@@ -85,6 +106,13 @@ export interface User {
 - **PUT** `/update/:id` - Atualizar um usuário
 - **DELETE** `/delete/:id` - Remover um usuário
 - **GET** `/hello` - Rota de teste
+
+### Relatórios
+- **POST** `/reports/total-spent-by-month` - Total gasto em produtos por mês. (Para testar crie duas Query Parameters: startDate e enDate, no formato: YYYY-MM)
+- **POST** `/reports/product-stock-period` - Estoque de produtos por período. (Para testar crie duas Query Parameters: startDate e enDate, no formato: YYYY-MM)
+
+### Estoque
+- **POST** `/stock/create` - Lançamentos em estoque de produtos, controlando a entrada e saída.
 
 ## Branches
 O projeto utiliza duas branches principais:

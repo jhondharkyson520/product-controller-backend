@@ -1,6 +1,6 @@
 import { Product } from "./product";
 
-export interface StockMovement {
+export interface Stock {
     id: string;
     productId: string;
     product?: Product;

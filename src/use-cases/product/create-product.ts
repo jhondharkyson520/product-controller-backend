@@ -1,14 +1,14 @@
 import { v4 as uuidv4 } from 'uuid';
 import dotenv from "dotenv";
 import { ProductRepository } from '../../repositories/product/product-repository';
-import { StockMovementRepository } from '../../repositories/stock/stock-repository';
+import { StockRepository } from '../../repositories/stock/stock-repository';
 
 dotenv.config();
 
 export class CreateProduct {
     constructor(
         private productRepository: ProductRepository,
-        private stockMovementRepository: StockMovementRepository
+        private stockMovementRepository: StockRepository
     ) {}
 
     async execute(name: string, amount: number, value: number) {

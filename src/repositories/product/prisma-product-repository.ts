@@ -25,12 +25,17 @@ export class PrismaProductRepository implements ProductRepository {
             where: {name: name}
         });
     }
+
+    async findById(id: string): Promise<Product | null> {
+        return prisma.product.findUnique({
+            where: {id: id}
+        });
+    }
     
     async update(id: string, data: Partial<Product>): Promise<Product> {
         return prisma.product.update({
             where: {id},
             data: {
-                id: data.id,
                 name: data.name,
                 amount: data.amount,
                 value: data.value,

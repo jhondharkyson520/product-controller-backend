@@ -1,6 +1,6 @@
-import { StockMovement } from "../../entities/stock-movement"; 
+import { Stock } from "../../entities/stock"; 
 
-export interface StockMovementRepository {
-    create(stock: StockMovement): Promise<StockMovement>;
-    findAll(): Promise<StockMovement[]>;
+export interface StockRepository {
+    create(stock: Stock): Promise<Stock>;
+    findAll(): Promise<Stock[]>;
 }
