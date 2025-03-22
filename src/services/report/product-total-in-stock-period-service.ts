@@ -10,7 +10,7 @@ export class ProductUsageByPeriodService {
     console.log("Start Date:", startDate);
     console.log("End Date:", endDate);
     const filteredStocks = stockMovements.filter((stock) => {
-      return stock.dateTime >= startDate && stock.dateTime <= endDate;
+      return stock.dateTime >= startDate && stock.dateTime <= endDate && stock.quantity <= 0;
     });
     
     //console.log("Filtered Stocks:", filteredStocks);
@@ -18,7 +18,7 @@ export class ProductUsageByPeriodService {
 
     filteredStocks.forEach((stock: Stock) => {
       const name = stock.product?.name;
-      const total = stock.quantity;
+      const total = stock.quantity * (-1);
       
       if(name) {
         if(productTotals[name]) {

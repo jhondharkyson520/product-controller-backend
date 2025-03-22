@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { PrismaStockRepository } from "../../repositories/stock/prisma-stock-repository";
-import { GetAllStocks } from "../../use-cases/stock/get-all-stocks";
+import { GetAllStocks } from "../../use-cases/stock/get-all-stocks-release";
 
 const stockRepository = new PrismaStockRepository();
 const findAllStocks = new GetAllStocks(stockRepository);
