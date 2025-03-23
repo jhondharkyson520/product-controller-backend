@@ -19,7 +19,7 @@ export const deleteUserController = async (req: Request, res: Response): Promise
         }
         return res.status(404).json({ error: 'User not found' });
     } catch (error: any) {
-        console.error(error);
+        //console.error(error);
         if(error.message === 'Error delete user.'){
             return res.status(500).json({ error: 'Error deleting user' });
         } else if(error.message === 'User not found.') {

@@ -19,7 +19,7 @@ export const deleteProductController = async (req: Request, res: Response): Prom
         }
         return res.status(404).json({ error: 'Product not found' });
     } catch (error: any) {
-        console.error(error);
+        //console.error(error);
         if(error.message === 'Error delete product.'){
             return res.status(500).json({ error: 'Error deleting product' });
         } else if(error.message === 'User not found.') {

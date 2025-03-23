@@ -8,7 +8,7 @@ const findAllStocks = new GetAllStocks(stockRepository);
 export const getAllStocksController = async (req: Request, res: Response): Promise<Response> => {
     try {
         const stock = await findAllStocks.execute();
-        console.log('stock controller: ', stock);
+        //console.log('stock controller: ', stock);
         
 
         return res.status(200).json({
@@ -16,7 +16,7 @@ export const getAllStocksController = async (req: Request, res: Response): Promi
             stock,
         });
     } catch (error) {
-        console.error(error);
+        //console.error(error);
         return res.status(500).json({ error: 'Internal Server Error' });
     }
 };

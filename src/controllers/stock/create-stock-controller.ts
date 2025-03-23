@@ -26,7 +26,7 @@ export const createStockController = async (req: Request, res: Response): Promis
             }
         });
     } catch(error: any) {
-        console.error(error);
+        //console.error(error);
         if(error.message === 'Product with this name already exists') {
             return res.status(409).json({error: 'Product with this name already exists'});
         }

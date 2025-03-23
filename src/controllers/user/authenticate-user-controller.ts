@@ -20,7 +20,7 @@ export const authenticateUserController = async (req: Request, res: Response): P
             token
         });
     } catch(error: any) {
-        console.error(error);
+        //console.error(error);
         if (error.message === 'Password incorrect') {
             return res.status(401).json({ error: 'Password incorrect' });
         } else if (error.message === 'User not found') {

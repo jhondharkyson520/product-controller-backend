@@ -18,7 +18,7 @@ export const getTotalSpentByMonthController = async (req: Request, res: Response
 
     return res.status(200).json(report);
   } catch (error) {
-    console.error('Error in getTotalSpentByMonthController:', error);
+    //console.error('Error in getTotalSpentByMonthController:', error);
     return res.status(500).json({ error: 'Internal server error' });
   }
 };

@@ -1,4 +1,4 @@
-import { StockMovement } from "./stock-movement";
+import { Stock} from "./stock";
 
 export interface Product {
     id: string;
@@ -7,5 +7,5 @@ export interface Product {
     value: number;
     createdAt: Date;
     updatedAt: Date;
-    stockMovements?: StockMovement[];
+    stockMovements?: Stock[];
 }

@@ -7,7 +7,6 @@ interface CustomJwtPayload extends JwtPayload {
   password: string;
 }
 
-
 declare global {
   namespace Express {
     interface Request {

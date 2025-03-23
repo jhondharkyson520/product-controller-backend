@@ -20,7 +20,7 @@ export const updateProductController = async (req: Request, res: Response): Prom
         }
         return res.status(404).json({ error: 'Product not found' });
     } catch (error) {
-        console.error(error);
+        //console.error(error);
         return res.status(500).json({ error: 'Internal Server Error' });
     }
 }

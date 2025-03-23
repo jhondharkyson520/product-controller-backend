@@ -7,15 +7,11 @@ export class ProductUsageByPeriodService {
 
   async execute(startDate: Date, endDate: Date): Promise<ProductUsageByPeriod[]> {
     const stockMovements = await this.stockMovement.findAll();
-    console.log("Start Date:", startDate);
-    console.log("End Date:", endDate);
     const filteredStocks = stockMovements.filter((stock) => {
       return stock.dateTime >= startDate && stock.dateTime <= endDate && stock.quantity <= 0;
-    });
-    
+    });    
     //console.log("Filtered Stocks:", filteredStocks);
     const productTotals: {[name: string]: number} = {};
-
     filteredStocks.forEach((stock: Stock) => {
       const name = stock.product?.name;
       const total = stock.quantity * (-1);

@@ -20,7 +20,7 @@ export const updateUserController = async (req: Request, res: Response): Promise
         }
         return res.status(404).json({ error: 'User not found' });
     } catch (error) {
-        console.error(error);
+        //console.error(error);
         return res.status(500).json({ error: 'Internal Server Error' });
     }
 }
