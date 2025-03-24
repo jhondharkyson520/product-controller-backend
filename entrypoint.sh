@@ -6,7 +6,7 @@ until nc -z db_product 5432; do
 done
 
 echo "Banco de dados pronto! Rodando as migrações..."
-npx prisma migrate deploy
+npx prisma migrate dev
 
 echo "Iniciando a aplicação..."
-node dist/src/main.js
+npm start

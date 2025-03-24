@@ -53,6 +53,7 @@ src/
   ├── main.ts
   ├── Dockerfile
   ├── docker-compose.yml
+  ├── entrypoint.sh
   ├── .dockerignore
 ```
 

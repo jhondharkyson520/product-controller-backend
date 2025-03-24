@@ -28,7 +28,6 @@ services:
     restart: unless-stopped
     depends_on:
       - db_product
-    entrypoint: ["/usr/src/product/entrypoint.sh"]
 
 networks:
   network_product:
