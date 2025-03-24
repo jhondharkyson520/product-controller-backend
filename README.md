@@ -1,7 +1,7 @@
 # Product Controller - Backend
 
 ## Visão Geral
-Este projeto é um backend desenvolvido com ``Node.js``, ``Express``, ``Prisma ORM`` e ``TypeScript``, seguindo os princípios do ``SOLID``, ``Clean Architecture`` e ``Clean Code``. Ele gerencia produtos e usuários, oferecendo ``autenticação JWT`` e armazenamento no ``PostgreSQL``. O projeto está sendo desenvolvido seguindo a metodologia ágil ``Scrum``.
+Este projeto é um backend desenvolvido com ``Node.js``, ``Express``, ``Prisma ORM`` e ``TypeScript``, seguindo os princípios do ``SOLID``, ``Clean Architecture`` e ``Clean Code``. Ele gerencia produtos e usuários, oferecendo ``autenticação JWT`` e armazenamento no ``PostgreSQL``. O sistema foi desenvolvido seguindo a metodologia ágil ``Scrum``.
 
 ## Tecnologias Utilizadas
 - ``Node.js``
@@ -46,6 +46,9 @@ src/
   │     ├── routes-user.ts
   │     ├── routes-stock.ts
   │     ├── routes-report.ts
+  ├── services/
+  │     ├── /interfaces
+  │     ├── /report
   ├── use-cases/
   │     ├── product/
   │     ├── user/
@@ -155,6 +158,9 @@ O projeto foi dividido em 4 sprints, o andamento do projeto e as sprints podem s
    docker-compose up --build
    ```
 6. O servidor estará disponível em `http://localhost:PORTA`.
+
+## Variável ambiente .env
+Foi criado uma variável ``example.env`` para facilitar. Modifique-a com suas informações e a renomeie para  `.env`. Faça isso antes de executar o projeto.
 
 ## Licença
 Este projeto está sob a licença MIT. Contribuições e sugestões são sempre bem vindas.
